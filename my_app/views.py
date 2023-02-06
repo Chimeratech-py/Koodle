@@ -4,6 +4,9 @@ from django.urls import reverse
 
 # Create your views here.
 
+def example_view(request):
+    return render(request,'my_app/example.html')
+
 articles = {
     "showbiz": "showbiz page",
     "politics": "politics page",
@@ -25,11 +28,13 @@ def experiment_view(request,num1,num2):
     return HttpResponse("The number is {}".format(str(res)))
 
 
-# def index(request):
-#     return HttpResponse("HELLO THIS IS A VIEW INSIDE MY APP")
+# # def index(request):
+# #     return HttpResponse("HELLO THIS IS A VIEW INSIDE MY APP")
 
 def topic_view(request,num_page):
     li = list(articles.keys())
-    topic = li[num_page]
+    li.insert(0, "NONE")
+    category = li[num_page]
     
-    return HttpResponseRedirect(reverse("topic-view",args=[topic]))
+    return HttpResponseRedirect(category)
+    #return HttpResponseRedirect(reverse("topic-view",args=[category]))
